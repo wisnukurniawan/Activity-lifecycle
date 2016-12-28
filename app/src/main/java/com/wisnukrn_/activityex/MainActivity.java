@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
 //        loadString();
     }
 
+    //pas back ditekan nav nya close
+    //kalo ga close activity di finish
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -117,6 +119,20 @@ public class MainActivity extends AppCompatActivity {
         return resourceId > 0 ? getResources().getDimensionPixelSize(resourceId) : 0;
     }
 
+    //Pas ada menu yang di klik nav nya close
+    private void setNavListener(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                mMenuItem = item;
+                mMenuItem.setCheckable(true);
+                mDrawerLayout.closeDrawers();
+
+                return true;
+            }
+        });
+    }
+
     private void addNavListener(final Toolbar toolbar, final NavigationView navigationView) {
         mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 toolbar, R.string.drawer_open, R.string.drawer_close){
@@ -144,19 +160,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
-    }
-
-    private void setNavListener(NavigationView navigationView) {
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                mMenuItem = item;
-                item.setCheckable(true);
-                mDrawerLayout.closeDrawers();
-
-                return true;
-            }
-        });
     }
 
     private void switchNavigationMenu(int itemId) {
