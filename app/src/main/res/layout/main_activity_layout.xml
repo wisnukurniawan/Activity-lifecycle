@@ -1,37 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:targetAPI="LOLLIPOP">
+        tools:context=".MainActivity"
+        tools:targetApi="LOLLIPOP">
 
-    <RelativeLayout
+    <android.support.v4.widget.DrawerLayout
+            android:id="@+id/dl_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <android.support.design.widget.AppBarLayout
-                android:id="@+id/app_bar"
+        <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
-                android:minHeight="?attr/actionBarSize">
+                android:layout_height="match_parent">
 
-            <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar_main"
+            <android.support.design.widget.AppBarLayout
+                    android:id="@+id/abl_main"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorAccent"
+                    android:elevation="4dp"
+                    android:minHeight="?attr/actionBarSize">
 
-        </android.support.design.widget.AppBarLayout>
+                <android.support.v7.widget.Toolbar
+                        android:id="@+id/toolbar_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:theme="@style/AppTheme.Toolbar"
+                        app:titleTextAppearance="@style/AppTheme.ToolbarTitle"/>
+            </android.support.design.widget.AppBarLayout>
 
-        <EditText
-                android:gravity="center"
+            <FrameLayout
+                    android:id="@+id/fl_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/abl_main"/>
+        </RelativeLayout>
+
+        <android.support.design.widget.NavigationView
+                android:id="@+id/nv_main"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="add text"
-                android:layout_centerVertical="true"
-                android:id="@+id/komentar"/>
-    </RelativeLayout>
-
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                app:headerLayout="@layout/view_navigation_header"
+                app:itemBackground="@drawable/bg_menu"
+                app:itemIconTint="@color/colorPrimaryDark"
+                app:itemTextColor="@color/colorPrimaryDark"
+                app:menu="@menu/menu_main"/>
+    </android.support.v4.widget.DrawerLayout>
 
 </android.support.design.widget.CoordinatorLayout>
