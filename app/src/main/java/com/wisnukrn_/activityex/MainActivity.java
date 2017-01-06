@@ -29,26 +29,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_layout);
 
+        //init toolbar sekaligus ngeset toolbar nya
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
         toolbar.setTitle(getResources().getString(R.string.app_name));
         toolbar.setPadding(0, getStatusBarHeight(), 0, 0);
         setSupportActionBar(toolbar);
 
+        //binding navdrawer
         mDrawerLayout = (DrawerLayout) findViewById(R.id.dl_main);
         final NavigationView navigationView = (NavigationView) findViewById(R.id.nv_main);
 
+        //set dan add navdrawer
         setNavListener(navigationView);
         addNavListener(toolbar, navigationView);
 
+        //agar bisa di toggle
         mDrawerLayout.addDrawerListener(mActionBarDrawerToggle);
 //        loadString();
     }
 
     //pas back ditekan nav nya close
-    //kalo ga close activity di finish
+    //kalo nav ga close activity di finish
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         if (mDrawerLayout.isDrawerVisible(GravityCompat.START)){
             mDrawerLayout.closeDrawers();
         } else {
@@ -56,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //pada awal masuk langsung sowhomefragment
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -63,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         showHomeFragment();
     }
 
+    //mendapatkan tinggin toolbar
     public int getStatusBarHeight() {
         final int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
         return resourceId > 0 ? getResources().getDimensionPixelSize(resourceId) : 0;
@@ -82,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //aksi apa yang bisa dilakukan oleh nav view kita setelah di klik
     private void addNavListener(final Toolbar toolbar, final NavigationView navigationView) {
         mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 toolbar, R.string.drawer_open, R.string.drawer_close){
@@ -101,8 +107,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
                 super.onDrawerSlide(drawerView, slideOffset);
-
-                if (null != drawerView && drawerView == navigationView){
+                if (drawerView != null && drawerView == navigationView){
                     super.onDrawerSlide(drawerView, 0);
                 } else {
                     super.onDrawerSlide(drawerView, slideOffset);
